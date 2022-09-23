@@ -241,6 +241,7 @@ jobs:
         - uses: marvinpinto/action-automatic-releases@master
           with:
               repo_token: ${{secrets.GITHUB_TOKEN}}
+              automatic_release_tag: latest
               files: pal.apk
               
      #google cloud shell 
