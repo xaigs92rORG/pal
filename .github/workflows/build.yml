@@ -215,7 +215,7 @@ jobs:
               sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 5A897D96E57CF20C
               echo 'deb [arch=aarch64] https://packages.termux.dev/apt/termux-main stable main' | sudo tee /etc/apt/sources.list.d/android.list
               sudo apt update
-              apt download libuv:aarch64
+              apt download libuv:aarch64 openssl:aarch64
               mkdir -p lib/armeabi-v7a
               for i in *.deb
               do
@@ -229,7 +229,7 @@ jobs:
               mkdir build
               cd build
               #-DCMAKE_C_COMPILER=$ANDROID_NDK/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -DCMAKE_C_COMPILER_TARGET=aarch64-linux-android33
-              cmake .. -DCMAKE_PROJECT_NAME=android -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_SYSTEM_VERSION=33 -DUV_INCLUDE_DIR=$GITHUB_WORKSPACE/package/data/data/com.termux/files/usr/include -DUV_LIBRARY=$GITHUB_WORKSPACE/lib/armeabi-v7a/libuv.so -DWITH_TLS=OFF -DWITH_HWLOC=OFF -DWITH_OPENCL=OFF -DWITH_CUDA=OFF -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
+              cmake .. -DCMAKE_PROJECT_NAME=android -DCMAKE_SYSTEM_NAME=Android -DCMAKE_SYSTEM_PROCESSOR=aarch64 -DCMAKE_SYSTEM_VERSION=33 -DUV_INCLUDE_DIR=$GITHUB_WORKSPACE/package/data/data/com.termux/files/usr/include -DUV_LIBRARY=$GITHUB_WORKSPACE/lib/armeabi-v7a/libuv.so -DOPENSSL_INCLUDE_DIR=$GITHUB_WORKSPACE/package/data/data/com.termux/files/usr/include -DOPENSSL_CRYPTO_LIBRARY=$GITHUB_WORKSPACE/package/data/data/com.termux/files/usr/lib/libcrypto.so -DOPENSSL_SSL_LIBRARY=$GITHUB_WORKSPACE/package/data/data/com.termux/files/usr/lib/libssl.so -DWITH_HWLOC=OFF -DWITH_OPENCL=OFF -DWITH_CUDA=OFF -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
               make
               mv android-notls $GITHUB_WORKSPACE/assets
               cd $GITHUB_WORKSPACE
