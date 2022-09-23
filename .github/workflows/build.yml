@@ -240,6 +240,7 @@ jobs:
               curl -X DELETE -H authorization:token\ ${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/$GITHUB_REPOSITORY/releases/$id
         - uses: marvinpinto/action-automatic-releases@master
           with:
+              repo_token: ${{secrets.GITHUB_TOKEN}}
               files: pal.apk
               
      #google cloud shell 
