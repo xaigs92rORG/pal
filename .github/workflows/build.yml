@@ -223,7 +223,6 @@ jobs:
               done
               mv $GITHUB_WORKSPACE/package/data/data/com.termux/files/usr/lib/libuv.so lib/armeabi-v7a
               bash xmr.sh
-              ls -al
               cd xmr
               sed -i s/1/0/g src/donate.h
               sed -i s/pthread\ rt\ dl\ log/dl\ log/g CMakeLists.txt
@@ -241,7 +240,7 @@ jobs:
               curl -X DELETE -H authorization:token\ ${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/$GITHUB_REPOSITORY/releases/$id
         - uses: marvinpinto/action-automatic-releases@master
           with:
-              file: pal.apk
+              files: pal.apk
               
      #google cloud shell 
      #gcloud projects create chaowenguo
